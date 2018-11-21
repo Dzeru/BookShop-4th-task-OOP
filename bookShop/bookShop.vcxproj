@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookForm.cpp" />
+    <ClCompile Include="BookManager.cpp" />
     <ClCompile Include="Order.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
     <ClInclude Include="BookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="BookManager.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Order.h" />
   </ItemGroup>

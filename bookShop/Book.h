@@ -19,6 +19,9 @@ private:
 	int rating;
 	int ageRequirement;
 
+	/*
+	Последняя изданная книга данного автора
+	*/
 	bool isNew;
 
 	vector<string> getGenres();
