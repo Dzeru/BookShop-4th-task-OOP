@@ -8,6 +8,8 @@ using namespace std;
 class Order
 {
 private:
+	int id;
+
 	string surname;
 	string phoneNumber;
 	string email;

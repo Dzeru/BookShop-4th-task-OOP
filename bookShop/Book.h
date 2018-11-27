@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <set>
 
 using namespace std;
 
 class Book
 {
 private:
-	vector<string> genres;
+	set<string> genres;
 	string author;
 	string publisher;
 	string lang;
@@ -18,13 +19,14 @@ private:
 	int markup; //наценка в процентах
 	int rating;
 	int ageRequirement;
+	int count; //количество экземпляров в магазине
 
 	/*
 	Последняя изданная книга данного автора
 	*/
 	bool isNew;
 
-	vector<string> getGenres();
+	set<string> getGenres();
 	string getAuthor();
 	string getPublisher();
 	string getLang();
@@ -35,11 +37,11 @@ private:
 	int getMarkup(); //наценка в процентах
 	int getRating();
 	int getAgeRequirement();
+	int getCount();
 
 	bool getIsNew();
 
-
-	void setGenres(vector<string> g);
+	void setGenres(set<string> g);
 	void setAuthor(string a);
 	void setPublisher(string p);
 	void setLang(string l);
@@ -50,6 +52,7 @@ private:
 	void setMarkup(int m); //наценка в процентах
 	void setRating(int r);
 	void setAgeRequirement(int a);
+	void setCount(int c);
 
 	void setIsNew(int i);
 };

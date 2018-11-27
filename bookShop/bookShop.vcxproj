@@ -95,6 +95,7 @@
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>Main</EntryPointSymbol>
+      <AdditionalLibraryDirectories>C:/Program Files/MySQL/Connector C++ 8.0/include</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,6 +137,7 @@
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookManager.cpp" />
+    <ClCompile Include="Database.cpp" />
     <ClCompile Include="Order.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +147,10 @@
     </ClInclude>
     <ClInclude Include="BookManager.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Database.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="TestConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BookForm.resx">

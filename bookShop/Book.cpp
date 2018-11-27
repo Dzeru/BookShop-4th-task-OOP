@@ -1,8 +1,9 @@
 #include "Book.h"
+#include "Database.h"
 
 using namespace std;
 
-vector<string> Book::getGenres()
+set<string> Book::getGenres()
 {
 	return genres;
 }
@@ -52,12 +53,17 @@ int Book::getAgeRequirement()
 	return ageRequirement;
 }
 
+int Book::getCount()
+{
+	return count;
+}
+
 bool Book::getIsNew()
 {
 	return isNew;
 }
 
-void Book::setGenres(vector<string> g)
+void Book::setGenres(set<string> g)
 {
 	genres = g;
 }
@@ -105,6 +111,11 @@ void Book::setRating(int r)
 void Book::setAgeRequirement(int a)
 {
 	ageRequirement = a;
+}
+
+void Book::setCount(int c)
+{
+	count = c;
 }
 
 void Book::setIsNew(int i)
