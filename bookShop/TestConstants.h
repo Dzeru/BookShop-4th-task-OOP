@@ -1,14 +1,37 @@
 #pragma once
 #include <vector>
-
-using namespace System;
-using namespace System::Collections::Generic;
+#include <set>
+#include "Constants.h"
 
 class TestConstants
 {
 public:
 	TestConstants() {};
 	~TestConstants() {};
+
+	static std::string getRandomAgeRequirement()
+	{
+		return ageRequirementTest[std::rand() % ageRequirementTest.size()];
+	}
+
+	static std::string getRandomLanguage()
+	{
+		return languageTest[std::rand() % languageTest.size()];
+	}
+
+	static std::set<std::string> getRandomGenres()
+	{
+		int numberOfGenres = std::rand() % 5;
+
+		std::set<std::string> genres;
+
+		for (int i = 0; i < numberOfGenres; i++)
+		{
+			genres.insert(genresTest[std::rand() % genresTest.size()]);
+		}
+
+		return genres;
+	}
 
 	static std::string getRandomBookName()
 	{
@@ -17,11 +40,6 @@ public:
 		int i3 = std::rand() % bookName3Test.size();
 
 		return bookName1Test[i1] + " " + bookName2Test[i2] + " " + bookName3Test[i3];
-	}
-
-	static int rnd()
-	{
-		return std::rand();
 	}
 
 	static std::string getRandomOrderSurname()
@@ -34,28 +52,47 @@ public:
 		return orderEmailTest[std::rand() % orderEmailTest.size()];
 	}
 
-	 std::string getRandomOrderPhone()
+	std::string getRandomOrderPhone()
 	{
 		return orderPhoneTest[std::rand() % orderPhoneTest.size()];
 	}
 
-	 static std::string getRandomBookAuthor()
+	static std::string getRandomBookAuthor()
 	{
 		return bookAuthorTest[std::rand() % bookAuthorTest.size()];
 	}
 
-	 static int getRandomYearOfPublishing()
+	static std::string getRandomPublisher()
+	{
+		return bookPublisherTest[std::rand() % bookPublisherTest.size()];
+	}
+
+	static int getRandomYearOfPublishing()
 	{
 		int rnd = std::rand();
 		if (rnd < 2018 && rnd > 1900)
 			return rnd;
 		else return (rnd % 2018);
 	}
+
+	static int getRandomNumberOfPages()
+	{
+		return (std::rand() % 3000);
+	}
+
+	static bool getRandomIsNew()
+	{
+		return (std::rand() % 2 == 0);
+	}
 private:
+	static std::vector<std::string> languageTest;
+	static std::vector<std::string> ageRequirementTest;
+	static std::vector<std::string> genresTest;
 	static std::vector<std::string> orderSurnameTest;
 	static std::vector<std::string> orderEmailTest;
 	static std::vector<std::string> orderPhoneTest;
 	static std::vector<std::string> bookAuthorTest;
+	static std::vector<std::string> bookPublisherTest;
 	static std::vector<std::string> bookName1Test;
 	static std::vector<std::string> bookName2Test;
 	static std::vector<std::string> bookName3Test;
@@ -120,60 +157,92 @@ std::vector<std::string> TestConstants::bookName3Test = { "Удивляется"
 														, "Ищет Ресторан \"Смысл Жизни\""
 														};
 
-std::vector<std::string> orderSurnameTest = { "Алексеев"
-											, "Волков"
-											, "Гладышева"
-											, "Демидова"
-											, "Кадомцев"
-											, "Козленкова"
-											, "Машкина"
-											, "Путилов"
-											, "Росличенко"
-											, "Степанова"
-											, "Фартушнова"
-											, "Худошин"
-											, "Шапкина"
-											, "Швец"
-											};
+std::vector<std::string> TestConstants::bookPublisherTest =  { "Эксмо"
+															 , "Просвещение"
+															 , "Рейли"
+															 , "Астер"
+															 , "Мнемозина"
+															 , "Самокат"
+															 , "Орион"
+															 , "Платон"
+															 };
 
-std::vector<std::string> orderEmailTest = { "1@mail.org"
-										  , "2@mail.org"
-										  , "3@mail.org"
-										  , "4@mail.org"
-										  , "5@mail.org"
-										  , "6@mail.org"
-										  , "7@mail.org"
-										  , "8@mail.org"
-										  , "9@mail.org"
-										  , "bookbookhowtobookbook@book.book"
-										  };
+std::vector<std::string> TestConstants::orderSurnameTest =  { "Алексеев"
+															, "Волков"
+															, "Гладышева"
+															, "Демидова"
+															, "Кадомцев"
+															, "Козленкова"
+															, "Машкина"
+															, "Путилов"
+															, "Росличенко"
+															, "Степанова"
+															, "Фартушнова"
+															, "Худошин"
+															, "Шапкина"
+															, "Швец"
+															};
 
-std::vector<std::string> orderPhoneTest = { "+79999999999"
-										  , "+79998888888"
-										  , "+79997777777"
-										  , "+79996666666"
-										  , "+79995555555"
-										  , "+79994444444"
-										  , "+79993333333"
-										  , "+79992222222"
-										  , "+79991111111"
-										  , "+79990000000"
-										  , "+79876543210"
-										  };
+std::vector<std::string> TestConstants::orderEmailTest = { "1@mail.org"
+														 , "2@mail.org"
+														 , "3@mail.org"
+														 , "4@mail.org"
+														 , "5@mail.org"
+														 , "6@mail.org"
+														 , "7@mail.org"
+														 , "8@mail.org"
+														 , "9@mail.org"
+														 , "bookbookhowtobookbook@book.book"
+														 };
 
-std::vector<std::string> bookAuthorTest = { "Джек Лондон"
-										  , "Валентина Осеева"
-										  , "Кентаро Миура"
-										  , "Михаил Лермонтов"
-										  , "Лев Толстой"
-										  , "Джордж Оруэлл"
-										  , "Федор Достоевский"
-										  , "Ян Перельман"
-										  , "Урсула ле Гуин"
-										  , "Валентин Катаев"
-										  , "Агата Кристи"
-										  , "Габриэль Гарсиа Маркес"
-										  , "Андре Моруа"
-										  , "Марк Твен"
-										  , "Александр Пушкин"
-										  };
+std::vector<std::string> TestConstants::orderPhoneTest =  { "+79999999999"
+														  , "+79998888888"
+														  , "+79997777777"
+														  , "+79996666666"
+														  , "+79995555555"
+														  , "+79994444444"
+														  , "+79993333333"
+														  , "+79992222222"
+														  , "+79991111111"
+														  , "+79990000000"
+														  , "+79876543210"
+														  };
+
+std::vector<std::string> TestConstants::bookAuthorTest =  { "Джек Лондон"
+														  , "Валентина Осеева"
+														  , "Кентаро Миура"
+														  , "Михаил Лермонтов"
+														  , "Лев Толстой"
+														  , "Джордж Оруэлл"
+														  , "Федор Достоевский"
+														  , "Ян Перельман"
+														  , "Урсула ле Гуин"
+														  , "Валентин Катаев"
+														  , "Агата Кристи"
+														  , "Габриэль Гарсиа Маркес"
+														  , "Андре Моруа"
+														  , "Марк Твен"
+														  , "Александр Пушкин"
+														  };
+
+std::vector<std::string> TestConstants::ageRequirementTest = {AGE_0, AGE_6, AGE_12, AGE_16, AGE_18};
+
+std::vector<std::string> TestConstants::languageTest = {RUSSIAN, ENGLISH, FRENCH, ITALIAN, DEUTCH, JAPANESE, CHINESE};
+
+std::vector<std::string> TestConstants::genresTest = { FANTASY
+													 , POP_SCIENCE
+													 , DETECTIVE
+													 , POETRY
+													 , CLASSIC
+													 , DRAMATURGY
+													 , HISTORY
+													 , ADVENTURES
+													 , HUMOR
+													 , COOKING
+													 , HOBBIES
+													 , IT
+													 , CHILD
+													 , SCIENCE
+													 , SCHOOLBOOK
+													 , BUSINESS
+													 , COMICS };

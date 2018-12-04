@@ -8,6 +8,11 @@ set<string> Book::getGenres()
 	return genres;
 }
 
+string Book::getBookName()
+{
+	return bookName;
+}
+
 string Book::getAuthor()
 {
 	return author;
@@ -23,7 +28,7 @@ string Book::getLang()
 	return lang;
 }
 
-int Book::getPrice()
+float Book::getPrice()
 {
 	return price;
 }
@@ -48,7 +53,7 @@ int Book::getRating()
 	return rating;
 }
 
-int Book::getAgeRequirement()
+std::string Book::getAgeRequirement()
 {
 	return ageRequirement;
 }
@@ -68,6 +73,11 @@ void Book::setGenres(set<string> g)
 	genres = g;
 }
 
+void Book::setBookName(string bn)
+{
+	bookName = bn;
+}
+
 void Book::setAuthor(string a)
 {
 	author = a;
@@ -83,7 +93,7 @@ void Book::setLang(string l)
 	lang = l;
 }
 
-void Book::setPrice(int p)
+void Book::setPrice(float p)
 {
 	price = p;
 }
@@ -108,7 +118,7 @@ void Book::setRating(int r)
 	rating = r;
 }
 
-void Book::setAgeRequirement(int a)
+void Book::setAgeRequirement(std::string a)
 {
 	ageRequirement = a;
 }

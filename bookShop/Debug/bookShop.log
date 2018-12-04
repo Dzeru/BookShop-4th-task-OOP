@@ -1,3 +1,4 @@
 ﻿  BookForm.cpp
+c:\users\dzeru\source\repos\bookshop\bookshop\bookfactory.h(30): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
   Book.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   bookShop.vcxproj -> C:\Users\Dzeru\source\repos\bookShop\Debug\bookShop.exe

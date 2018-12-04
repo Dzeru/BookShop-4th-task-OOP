@@ -1,5 +1,7 @@
 #pragma once
-#include "TestConstants.h"
+//#include "TestConstants.h"
+//#include "Book.h"
+#include "BookFactory.h"
 
 namespace bookShop {
 
@@ -43,7 +45,7 @@ namespace bookShop {
 	private: System::Windows::Forms::TextBox^  textBoxDayStep;
 	private: System::Windows::Forms::TextBox^  textBoxDaysNumber;
 	private: System::Windows::Forms::Label^  labelDayStep;
-	private: System::Windows::Forms::TextBox^  textBox1;
+
 	private: System::Windows::Forms::Timer^  timerConfig;
 	private: System::Windows::Forms::TextBox^  textBoxSec;
 	private: System::Windows::Forms::Label^  labelSec;
@@ -75,6 +77,11 @@ namespace bookShop {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  BookName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Author;
 	private: System::Windows::Forms::DataGridViewButtonColumn^  ShowAll;
+	private: System::Windows::Forms::TextBox^  textBoxNewMarkup;
+	private: System::Windows::Forms::TextBox^  textBoxUsualMarkup;
+	private: System::Windows::Forms::Label^  labelNewMarkup;
+	private: System::Windows::Forms::Label^  labelUsualMarkup;
+	private: System::Windows::Forms::Label^  labelMarkups;
 
 
 
@@ -115,7 +122,6 @@ namespace bookShop {
 			this->textBoxDaysNumber = (gcnew System::Windows::Forms::TextBox());
 			this->labelDayStep = (gcnew System::Windows::Forms::Label());
 			this->labelDaysNumber = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->timerConfig = (gcnew System::Windows::Forms::Timer(this->components));
 			this->groupBoxAssortment = (gcnew System::Windows::Forms::GroupBox());
 			this->labelShowAll = (gcnew System::Windows::Forms::Label());
@@ -126,6 +132,11 @@ namespace bookShop {
 			this->BookName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Author = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ShowAll = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->labelMarkups = (gcnew System::Windows::Forms::Label());
+			this->labelUsualMarkup = (gcnew System::Windows::Forms::Label());
+			this->labelNewMarkup = (gcnew System::Windows::Forms::Label());
+			this->textBoxUsualMarkup = (gcnew System::Windows::Forms::TextBox());
+			this->textBoxNewMarkup = (gcnew System::Windows::Forms::TextBox());
 			this->groupBoxConfig->SuspendLayout();
 			this->groupBoxAssortment->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewShowAll))->BeginInit();
@@ -134,6 +145,11 @@ namespace bookShop {
 			// 
 			// groupBoxConfig
 			// 
+			this->groupBoxConfig->Controls->Add(this->textBoxNewMarkup);
+			this->groupBoxConfig->Controls->Add(this->textBoxUsualMarkup);
+			this->groupBoxConfig->Controls->Add(this->labelNewMarkup);
+			this->groupBoxConfig->Controls->Add(this->labelUsualMarkup);
+			this->groupBoxConfig->Controls->Add(this->labelMarkups);
 			this->groupBoxConfig->Controls->Add(this->textBoxSec);
 			this->groupBoxConfig->Controls->Add(this->labelSec);
 			this->groupBoxConfig->Controls->Add(this->buttonStop);
@@ -144,7 +160,7 @@ namespace bookShop {
 			this->groupBoxConfig->Controls->Add(this->labelDaysNumber);
 			this->groupBoxConfig->Location = System::Drawing::Point(13, 13);
 			this->groupBoxConfig->Name = L"groupBoxConfig";
-			this->groupBoxConfig->Size = System::Drawing::Size(267, 275);
+			this->groupBoxConfig->Size = System::Drawing::Size(267, 399);
 			this->groupBoxConfig->TabIndex = 0;
 			this->groupBoxConfig->TabStop = false;
 			this->groupBoxConfig->Text = L"Конфигурация";
@@ -168,7 +184,7 @@ namespace bookShop {
 			// 
 			// buttonStop
 			// 
-			this->buttonStop->Location = System::Drawing::Point(148, 197);
+			this->buttonStop->Location = System::Drawing::Point(148, 341);
 			this->buttonStop->Name = L"buttonStop";
 			this->buttonStop->Size = System::Drawing::Size(100, 41);
 			this->buttonStop->TabIndex = 5;
@@ -178,7 +194,7 @@ namespace bookShop {
 			// 
 			// buttonStart
 			// 
-			this->buttonStart->Location = System::Drawing::Point(10, 197);
+			this->buttonStart->Location = System::Drawing::Point(11, 341);
 			this->buttonStart->Name = L"buttonStart";
 			this->buttonStart->Size = System::Drawing::Size(102, 41);
 			this->buttonStart->TabIndex = 4;
@@ -217,14 +233,6 @@ namespace bookShop {
 			this->labelDaysNumber->Size = System::Drawing::Size(122, 23);
 			this->labelDaysNumber->TabIndex = 0;
 			this->labelDaysNumber->Text = L"Кол-во дней";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(12, 294);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 30);
-			this->textBox1->TabIndex = 1;
-			this->textBox1->Text = L"0";
 			// 
 			// timerConfig
 			// 
@@ -329,6 +337,47 @@ namespace bookShop {
 			this->ShowAll->UseColumnTextForButtonValue = true;
 			this->ShowAll->Width = 148;
 			// 
+			// labelMarkups
+			// 
+			this->labelMarkups->AutoSize = true;
+			this->labelMarkups->Location = System::Drawing::Point(91, 187);
+			this->labelMarkups->Name = L"labelMarkups";
+			this->labelMarkups->Size = System::Drawing::Size(126, 23);
+			this->labelMarkups->TabIndex = 8;
+			this->labelMarkups->Text = L"Наценки в %";
+			// 
+			// labelUsualMarkup
+			// 
+			this->labelUsualMarkup->AutoSize = true;
+			this->labelUsualMarkup->Location = System::Drawing::Point(11, 221);
+			this->labelUsualMarkup->Name = L"labelUsualMarkup";
+			this->labelUsualMarkup->Size = System::Drawing::Size(93, 23);
+			this->labelUsualMarkup->TabIndex = 9;
+			this->labelUsualMarkup->Text = L"Обычная";
+			// 
+			// labelNewMarkup
+			// 
+			this->labelNewMarkup->AutoSize = true;
+			this->labelNewMarkup->Location = System::Drawing::Point(15, 267);
+			this->labelNewMarkup->Name = L"labelNewMarkup";
+			this->labelNewMarkup->Size = System::Drawing::Size(149, 23);
+			this->labelNewMarkup->TabIndex = 10;
+			this->labelNewMarkup->Text = L"Для новых книг";
+			// 
+			// textBoxUsualMarkup
+			// 
+			this->textBoxUsualMarkup->Location = System::Drawing::Point(168, 221);
+			this->textBoxUsualMarkup->Name = L"textBoxUsualMarkup";
+			this->textBoxUsualMarkup->Size = System::Drawing::Size(80, 30);
+			this->textBoxUsualMarkup->TabIndex = 11;
+			// 
+			// textBoxNewMarkup
+			// 
+			this->textBoxNewMarkup->Location = System::Drawing::Point(168, 267);
+			this->textBoxNewMarkup->Name = L"textBoxNewMarkup";
+			this->textBoxNewMarkup->Size = System::Drawing::Size(80, 30);
+			this->textBoxNewMarkup->TabIndex = 12;
+			// 
 			// BookForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 23);
@@ -336,7 +385,6 @@ namespace bookShop {
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(1479, 727);
 			this->Controls->Add(this->groupBoxAssortment);
-			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->groupBoxConfig);
 			this->Font = (gcnew System::Drawing::Font(L"Arial", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
@@ -355,7 +403,6 @@ namespace bookShop {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewShowAll))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewAssortment))->EndInit();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -364,7 +411,7 @@ namespace bookShop {
 	private: System::Void BookForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 
-Int32 daysNumber, dayStep, sec, i = 0;
+Int32 daysNumber, dayStep, sec, usualMarkup, newMarkup, i = 0;
 
 private: System::Void buttonStart_Click(System::Object^  sender, System::EventArgs^  e) {
 	bool parseDayNumber = Int32::TryParse(this->textBoxDaysNumber->Text, daysNumber);
@@ -374,12 +421,19 @@ private: System::Void buttonStart_Click(System::Object^  sender, System::EventAr
 	timerConfig->Interval = sec * 1000;
 	timerConfig->Enabled = true;
 
-	this->textBox1->Text = System::Convert::ToString(TestConstants::rnd());
+	bool parseUsualMarkup = Int32::TryParse(this->textBoxUsualMarkup->Text, usualMarkup);
+	bool parseNewMarkup = Int32::TryParse(this->textBoxNewMarkup->Text, newMarkup);
+	
+	std::vector<Book*> startAssortment = BookFactory::getRandomListOfBooks(usualMarkup, newMarkup);
 
-	this->dataGridViewAssortment->RowCount = 1;
+	this->dataGridViewAssortment->RowCount = startAssortment.size();
 	this->dataGridViewAssortment->ColumnCount = 3;
-	this->dataGridViewAssortment->Rows[0]->Cells[0]->Value = gcnew String(TestConstants::getRandomBookName().c_str());
-	this->dataGridViewAssortment->Rows[0]->Cells[1]->Value = System::Convert::ToString( "Test author");
+
+	for (int i = 0; i < this->dataGridViewAssortment->RowCount; i++)
+	{
+		this->dataGridViewAssortment->Rows[i]->Cells[0]->Value = gcnew String(startAssortment[i]->getBookName().c_str());
+		this->dataGridViewAssortment->Rows[i]->Cells[1]->Value = gcnew String(startAssortment[i]->getAuthor().c_str());
+	}
 }
 
 private: System::Void buttonStop_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -387,7 +441,7 @@ private: System::Void buttonStop_Click(System::Object^  sender, System::EventArg
 	i = 0;
 
 	this->dataGridViewAssortment->RowCount = 0;
-	this->dataGridViewAssortment->ColumnCount = 0;
+	//this->dataGridViewAssortment->ColumnCount = 0;
 
 	this->dataGridViewShowAll->RowCount = 0;
 	this->dataGridViewShowAll->ColumnCount = 0;
@@ -405,15 +459,23 @@ private: System::Void dataGridViewAssortment_CellContentClick(System::Object^  s
 	{
 		int currentRow = this->dataGridViewAssortment->CurrentRow->Index;
 
-		String^ name = System::Convert::ToString(this->dataGridViewAssortment->Rows[0]->Cells[0]->Value);
-		String^ author = System::Convert::ToString(this->dataGridViewAssortment->Rows[0]->Cells[1]->Value);
+		String^ name = System::Convert::ToString(this->dataGridViewAssortment->Rows[currentRow]->Cells[0]->Value);
+		String^ author = System::Convert::ToString(this->dataGridViewAssortment->Rows[currentRow]->Cells[1]->Value);
 
-		this->dataGridViewShowAll->RowCount = 2;
+		this->dataGridViewShowAll->RowCount = 10;
 		this->dataGridViewShowAll->ColumnCount = 2;
 
 		this->dataGridViewShowAll->Rows[0]->Cells[0]->Value = System::Convert::ToString("Название");
 		this->dataGridViewShowAll->Rows[1]->Cells[0]->Value = System::Convert::ToString("Автор");
-
+		this->dataGridViewShowAll->Rows[2]->Cells[0]->Value = System::Convert::ToString("Количество страниц");
+		this->dataGridViewShowAll->Rows[3]->Cells[0]->Value = System::Convert::ToString("Жанры");
+		this->dataGridViewShowAll->Rows[4]->Cells[0]->Value = System::Convert::ToString("Язык");
+		this->dataGridViewShowAll->Rows[5]->Cells[0]->Value = System::Convert::ToString("Издательство");
+		this->dataGridViewShowAll->Rows[6]->Cells[0]->Value = System::Convert::ToString("Год издания");
+		this->dataGridViewShowAll->Rows[7]->Cells[0]->Value = System::Convert::ToString("Возрастной ценз");
+		this->dataGridViewShowAll->Rows[8]->Cells[0]->Value = System::Convert::ToString("Осталось на складе");
+		this->dataGridViewShowAll->Rows[9]->Cells[0]->Value = System::Convert::ToString("Цена, руб.");
+		
 		this->dataGridViewShowAll->Rows[0]->Cells[1]->Value = name;
 		this->dataGridViewShowAll->Rows[1]->Cells[1]->Value = author;
 	}
