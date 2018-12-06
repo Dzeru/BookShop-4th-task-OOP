@@ -1,3 +1,3 @@
 #include "Database.h"
-#include <vector>
 
+Database* Database::databaseInstance = 0;

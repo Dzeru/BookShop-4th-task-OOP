@@ -69,10 +69,14 @@ public:
 
 	static int getRandomYearOfPublishing()
 	{
-		int rnd = std::rand();
-		if (rnd < 2018 && rnd > 1900)
-			return rnd;
-		else return (rnd % 2018);
+		int rnd = std::rand() % 2019;
+
+		while (rnd < 1900 || rnd > 2018)
+		{
+				rnd = std::rand() % 2019;
+		}
+
+		return rnd;
 	}
 
 	static int getRandomNumberOfPages()

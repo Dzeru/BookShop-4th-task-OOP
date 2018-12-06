@@ -1,6 +1,7 @@
 #pragma once
-#include "Book.h"
+//#include "Book.h"
 #include "TestConstants.h"
+#include "Database.h"
 
 class BookFactory
 {
@@ -8,6 +9,7 @@ public:
 	static Book* getRandomBook(int usualBookPercentMarkup, int newBookPercentMarkup)
 	{
 		Book* book = new Book();
+
 		book->setBookName(TestConstants::getRandomBookName());
 		book->setAuthor(TestConstants::getRandomBookAuthor());
 		book->setPublisher(TestConstants::getRandomPublisher());
@@ -27,7 +29,7 @@ public:
 			book->setMarkup(usualBookPercentMarkup);
 		}
 
-		float price = book->getNumberOfPages() / 2 * (book->getMarkup() / 100);
+		float price = ((float) book->getNumberOfPages()) / 2.0 * ((float) book->getMarkup()) / 100.0;
 
 		book->setPrice(price);
 
@@ -48,7 +50,9 @@ public:
 
 		for (int i = 0; i < rnd; i++)
 		{
-			randomBooks.push_back(getRandomBook(usualMarkup, newMarkup));
+			Book* newRandomBook = getRandomBook(usualMarkup, newMarkup);
+			randomBooks.push_back(newRandomBook);
+			Database::getInstance()->updateBook(newRandomBook);
 		}
 
 		return randomBooks;

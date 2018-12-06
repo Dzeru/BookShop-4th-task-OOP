@@ -138,6 +138,7 @@
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookManager.cpp" />
     <ClCompile Include="Database.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Order.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +150,11 @@
     <ClInclude Include="BookManager.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Database.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="TestConstants.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BookForm.resx">

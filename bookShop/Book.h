@@ -2,11 +2,12 @@
 #include <string>
 #include <vector>
 #include <set>
+#include "Entity.h"
 
-class Book
+class Book : public Entity
 {
 public:
-	Book() {};
+	Book() { Entity(); };
 	~Book() {};
 
 	std::set<std::string> getGenres();

@@ -3,25 +3,21 @@
 #include <map>
 #include "Book.h"
 
-using namespace std;
-
 class Order
 {
-private:
-	int id;
-
-	string surname;
-	string phoneNumber;
-	string email;
-	map<Book, int> orderList;
 public:
-	string getSurname();
-	string getPhoneNumber();
-	string getEmail();
-	map<Book, int> getOrderList();
+	std::string getSurname();
+	std::string getPhoneNumber();
+	std::string getEmail();
+	std::map<Book, int> getOrderList();
 
-	void setSurname(string s);
-	void setPhoneNumber(string ph);
-	void setEmail(string e);
-	void setOrderList(map<Book, int> o);
+	void setSurname(std::string s);
+	void setPhoneNumber(std::string ph);
+	void setEmail(std::string e);
+	void setOrderList(std::map<Book, int> o);
+private:
+	std::string surname;
+	std::string phoneNumber;
+	std::string email;
+	std::map<Book, int> orderList;
 };

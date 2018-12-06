@@ -1,29 +1,27 @@
 #include "Book.h"
 #include "Database.h"
 
-using namespace std;
-
-set<string> Book::getGenres()
+std::set<std::string> Book::getGenres()
 {
 	return genres;
 }
 
-string Book::getBookName()
+std::string Book::getBookName()
 {
 	return bookName;
 }
 
-string Book::getAuthor()
+std::string Book::getAuthor()
 {
 	return author;
 }
 
-string Book::getPublisher()
+std::string Book::getPublisher()
 {
 	return publisher;
 }
 
-string Book::getLang()
+std::string Book::getLang()
 {
 	return lang;
 }
@@ -68,27 +66,27 @@ bool Book::getIsNew()
 	return isNew;
 }
 
-void Book::setGenres(set<string> g)
+void Book::setGenres(std::set<std::string> g)
 {
 	genres = g;
 }
 
-void Book::setBookName(string bn)
+void Book::setBookName(std::string bn)
 {
 	bookName = bn;
 }
 
-void Book::setAuthor(string a)
+void Book::setAuthor(std::string a)
 {
 	author = a;
 }
 
-void Book::setPublisher(string p)
+void Book::setPublisher(std::string p)
 {
 	publisher = p;
 }
 
-void Book::setLang(string l)
+void Book::setLang(std::string l)
 {
 	lang = l;
 }
