@@ -1,7 +1,10 @@
-#pragma once
+п»ї#pragma once
 #include "Utils.h"
 #include "BookFactory.h"
 #include "OrderFactory.h"
+#include "BookManager.h"
+#include "Logger.h"
+#include "StatisticsForm.h"
 
 namespace bookShop {
 
@@ -13,7 +16,7 @@ namespace bookShop {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Сводка для BookForm
+	/// РЎРІРѕРґРєР° РґР»СЏ BookForm
 	/// </summary>
 	public ref class BookForm : public System::Windows::Forms::Form
 	{
@@ -22,13 +25,13 @@ namespace bookShop {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// РћСЃРІРѕР±РѕРґРёС‚СЊ РІСЃРµ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ СЂРµСЃСѓСЂСЃС‹.
 		/// </summary>
 		~BookForm()
 		{
@@ -53,74 +56,46 @@ namespace bookShop {
 	private: System::Windows::Forms::DataGridView^  dataGridViewAssortment;
 	private: System::Windows::Forms::DataGridView^  dataGridViewShowAll;
 
-
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^  labelShowAll;
-
-
-
-
-
-
-
 
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Key;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Value;
-
-
 
 	private: System::Windows::Forms::TextBox^  textBoxNewMarkup;
 	private: System::Windows::Forms::TextBox^  textBoxUsualMarkup;
 	private: System::Windows::Forms::Label^  labelNewMarkup;
 	private: System::Windows::Forms::Label^  labelUsualMarkup;
 	private: System::Windows::Forms::Label^  labelMarkups;
+
+	private: System::Windows::Forms::GroupBox^  groupBoxOrders;
+	private: System::Windows::Forms::DataGridView^  dataGridViewOrders;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Id;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  BookName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Author;
 	private: System::Windows::Forms::DataGridViewButtonColumn^  ShowAll;
-	private: System::Windows::Forms::GroupBox^  groupBoxOrders;
-	private: System::Windows::Forms::DataGridView^  dataGridViewOrders;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  OrderInfo;
+	private: System::Windows::Forms::TextBox^  textBoxDelivery;
+	private: System::Windows::Forms::Label^  labelDelivery;
 
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
 		/// <summary>
-		/// Обязательная переменная конструктора.
+		/// РћР±СЏР·Р°С‚РµР»СЊРЅР°СЏ РїРµСЂРµРјРµРЅРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°.
 		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Требуемый метод для поддержки конструктора — не изменяйте 
-		/// содержимое этого метода с помощью редактора кода.
+		/// РўСЂРµР±СѓРµРјС‹Р№ РјРµС‚РѕРґ РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° вЂ” РЅРµ РёР·РјРµРЅСЏР№С‚Рµ 
+		/// СЃРѕРґРµСЂР¶РёРјРѕРµ СЌС‚РѕРіРѕ РјРµС‚РѕРґР° СЃ РїРѕРјРѕС‰СЊСЋ СЂРµРґР°РєС‚РѕСЂР° РєРѕРґР°.
 		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			this->groupBoxConfig = (gcnew System::Windows::Forms::GroupBox());
+			this->textBoxDelivery = (gcnew System::Windows::Forms::TextBox());
+			this->labelDelivery = (gcnew System::Windows::Forms::Label());
 			this->textBoxNewMarkup = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxUsualMarkup = (gcnew System::Windows::Forms::TextBox());
 			this->labelNewMarkup = (gcnew System::Windows::Forms::Label());
@@ -147,6 +122,7 @@ namespace bookShop {
 			this->ShowAll = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->groupBoxOrders = (gcnew System::Windows::Forms::GroupBox());
 			this->dataGridViewOrders = (gcnew System::Windows::Forms::DataGridView());
+			this->OrderInfo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBoxConfig->SuspendLayout();
 			this->groupBoxAssortment->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewShowAll))->BeginInit();
@@ -157,6 +133,8 @@ namespace bookShop {
 			// 
 			// groupBoxConfig
 			// 
+			this->groupBoxConfig->Controls->Add(this->textBoxDelivery);
+			this->groupBoxConfig->Controls->Add(this->labelDelivery);
 			this->groupBoxConfig->Controls->Add(this->textBoxNewMarkup);
 			this->groupBoxConfig->Controls->Add(this->textBoxUsualMarkup);
 			this->groupBoxConfig->Controls->Add(this->labelNewMarkup);
@@ -172,11 +150,27 @@ namespace bookShop {
 			this->groupBoxConfig->Controls->Add(this->labelDaysNumber);
 			this->groupBoxConfig->Location = System::Drawing::Point(13, 13);
 			this->groupBoxConfig->Name = L"groupBoxConfig";
-			this->groupBoxConfig->Size = System::Drawing::Size(267, 399);
+			this->groupBoxConfig->Size = System::Drawing::Size(267, 654);
 			this->groupBoxConfig->TabIndex = 0;
 			this->groupBoxConfig->TabStop = false;
-			this->groupBoxConfig->Text = L"Конфигурация";
+			this->groupBoxConfig->Text = L"РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ";
 			this->groupBoxConfig->Enter += gcnew System::EventHandler(this, &BookForm::groupBoxConfig_Enter);
+			// 
+			// textBoxDelivery
+			// 
+			this->textBoxDelivery->Location = System::Drawing::Point(76, 357);
+			this->textBoxDelivery->Name = L"textBoxDelivery";
+			this->textBoxDelivery->Size = System::Drawing::Size(100, 30);
+			this->textBoxDelivery->TabIndex = 14;
+			// 
+			// labelDelivery
+			// 
+			this->labelDelivery->AutoSize = true;
+			this->labelDelivery->Location = System::Drawing::Point(25, 318);
+			this->labelDelivery->Name = L"labelDelivery";
+			this->labelDelivery->Size = System::Drawing::Size(210, 23);
+			this->labelDelivery->TabIndex = 13;
+			this->labelDelivery->Text = L"Р”РѕСЃС‚Р°РІРєР° РІ РґРЅСЏС… (1-5)";
 			// 
 			// textBoxNewMarkup
 			// 
@@ -199,7 +193,7 @@ namespace bookShop {
 			this->labelNewMarkup->Name = L"labelNewMarkup";
 			this->labelNewMarkup->Size = System::Drawing::Size(149, 23);
 			this->labelNewMarkup->TabIndex = 10;
-			this->labelNewMarkup->Text = L"Для новых книг";
+			this->labelNewMarkup->Text = L"Р”Р»СЏ РЅРѕРІС‹С… РєРЅРёРі";
 			// 
 			// labelUsualMarkup
 			// 
@@ -208,16 +202,16 @@ namespace bookShop {
 			this->labelUsualMarkup->Name = L"labelUsualMarkup";
 			this->labelUsualMarkup->Size = System::Drawing::Size(93, 23);
 			this->labelUsualMarkup->TabIndex = 9;
-			this->labelUsualMarkup->Text = L"Обычная";
+			this->labelUsualMarkup->Text = L"РћР±С‹С‡РЅР°СЏ";
 			// 
 			// labelMarkups
 			// 
 			this->labelMarkups->AutoSize = true;
-			this->labelMarkups->Location = System::Drawing::Point(91, 187);
+			this->labelMarkups->Location = System::Drawing::Point(63, 186);
 			this->labelMarkups->Name = L"labelMarkups";
 			this->labelMarkups->Size = System::Drawing::Size(126, 23);
 			this->labelMarkups->TabIndex = 8;
-			this->labelMarkups->Text = L"Наценки в %";
+			this->labelMarkups->Text = L"РќР°С†РµРЅРєРё РІ %";
 			// 
 			// textBoxSec
 			// 
@@ -233,25 +227,25 @@ namespace bookShop {
 			this->labelSec->Name = L"labelSec";
 			this->labelSec->Size = System::Drawing::Size(143, 23);
 			this->labelSec->TabIndex = 6;
-			this->labelSec->Text = L"Секунд на шаг";
+			this->labelSec->Text = L"РЎРµРєСѓРЅРґ РЅР° С€Р°Рі";
 			// 
 			// buttonStop
 			// 
-			this->buttonStop->Location = System::Drawing::Point(148, 341);
+			this->buttonStop->Location = System::Drawing::Point(149, 591);
 			this->buttonStop->Name = L"buttonStop";
 			this->buttonStop->Size = System::Drawing::Size(100, 41);
 			this->buttonStop->TabIndex = 5;
-			this->buttonStop->Text = L"Стоп";
+			this->buttonStop->Text = L"РЎС‚РѕРї";
 			this->buttonStop->UseVisualStyleBackColor = true;
 			this->buttonStop->Click += gcnew System::EventHandler(this, &BookForm::buttonStop_Click);
 			// 
 			// buttonStart
 			// 
-			this->buttonStart->Location = System::Drawing::Point(11, 341);
+			this->buttonStart->Location = System::Drawing::Point(27, 591);
 			this->buttonStart->Name = L"buttonStart";
 			this->buttonStart->Size = System::Drawing::Size(102, 41);
 			this->buttonStart->TabIndex = 4;
-			this->buttonStart->Text = L"Старт";
+			this->buttonStart->Text = L"РЎС‚Р°СЂС‚";
 			this->buttonStart->UseVisualStyleBackColor = true;
 			this->buttonStart->Click += gcnew System::EventHandler(this, &BookForm::buttonStart_Click);
 			// 
@@ -276,7 +270,7 @@ namespace bookShop {
 			this->labelDayStep->Name = L"labelDayStep";
 			this->labelDayStep->Size = System::Drawing::Size(112, 23);
 			this->labelDayStep->TabIndex = 1;
-			this->labelDayStep->Text = L"Шаг в днях";
+			this->labelDayStep->Text = L"РЁР°Рі РІ РґРЅСЏС…";
 			// 
 			// labelDaysNumber
 			// 
@@ -285,7 +279,7 @@ namespace bookShop {
 			this->labelDaysNumber->Name = L"labelDaysNumber";
 			this->labelDaysNumber->Size = System::Drawing::Size(122, 23);
 			this->labelDaysNumber->TabIndex = 0;
-			this->labelDaysNumber->Text = L"Кол-во дней";
+			this->labelDaysNumber->Text = L"РљРѕР»-РІРѕ РґРЅРµР№";
 			// 
 			// timerConfig
 			// 
@@ -298,10 +292,11 @@ namespace bookShop {
 			this->groupBoxAssortment->Controls->Add(this->dataGridViewAssortment);
 			this->groupBoxAssortment->Location = System::Drawing::Point(308, 13);
 			this->groupBoxAssortment->Name = L"groupBoxAssortment";
-			this->groupBoxAssortment->Size = System::Drawing::Size(806, 698);
+			this->groupBoxAssortment->Size = System::Drawing::Size(650, 654);
 			this->groupBoxAssortment->TabIndex = 2;
 			this->groupBoxAssortment->TabStop = false;
-			this->groupBoxAssortment->Text = L"Ассортимент";
+			this->groupBoxAssortment->Text = L"РђСЃСЃРѕСЂС‚РёРјРµРЅС‚";
+			this->groupBoxAssortment->Enter += gcnew System::EventHandler(this, &BookForm::groupBoxAssortment_Enter);
 			// 
 			// labelShowAll
 			// 
@@ -310,7 +305,7 @@ namespace bookShop {
 			this->labelShowAll->Name = L"labelShowAll";
 			this->labelShowAll->Size = System::Drawing::Size(267, 23);
 			this->labelShowAll->TabIndex = 2;
-			this->labelShowAll->Text = L"Полная информация о книге";
+			this->labelShowAll->Text = L"РџРѕР»РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ РєРЅРёРіРµ";
 			// 
 			// dataGridViewShowAll
 			// 
@@ -329,19 +324,19 @@ namespace bookShop {
 			this->dataGridViewShowAll->Name = L"dataGridViewShowAll";
 			this->dataGridViewShowAll->ReadOnly = true;
 			this->dataGridViewShowAll->RowTemplate->Height = 28;
-			this->dataGridViewShowAll->Size = System::Drawing::Size(760, 255);
+			this->dataGridViewShowAll->Size = System::Drawing::Size(600, 219);
 			this->dataGridViewShowAll->TabIndex = 1;
 			// 
 			// Key
 			// 
-			this->Key->HeaderText = L"Поле";
+			this->Key->HeaderText = L"РџРѕР»Рµ";
 			this->Key->Name = L"Key";
 			this->Key->ReadOnly = true;
 			this->Key->Width = 150;
 			// 
 			// Value
 			// 
-			this->Value->HeaderText = L"Значение";
+			this->Value->HeaderText = L"Р—РЅР°С‡РµРЅРёРµ";
 			this->Value->Name = L"Value";
 			this->Value->ReadOnly = true;
 			this->Value->Width = 250;
@@ -362,7 +357,7 @@ namespace bookShop {
 			this->dataGridViewAssortment->Name = L"dataGridViewAssortment";
 			this->dataGridViewAssortment->ReadOnly = true;
 			this->dataGridViewAssortment->RowTemplate->Height = 28;
-			this->dataGridViewAssortment->Size = System::Drawing::Size(760, 302);
+			this->dataGridViewAssortment->Size = System::Drawing::Size(600, 302);
 			this->dataGridViewAssortment->TabIndex = 0;
 			this->dataGridViewAssortment->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookForm::dataGridViewAssortment_CellContentClick);
 			// 
@@ -371,58 +366,70 @@ namespace bookShop {
 			this->Id->HeaderText = L"ID";
 			this->Id->Name = L"Id";
 			this->Id->ReadOnly = true;
+			this->Id->Width = 80;
 			// 
 			// BookName
 			// 
-			this->BookName->HeaderText = L"Название";
+			this->BookName->HeaderText = L"РќР°Р·РІР°РЅРёРµ";
 			this->BookName->Name = L"BookName";
 			this->BookName->ReadOnly = true;
-			this->BookName->Width = 298;
+			this->BookName->Width = 180;
 			// 
 			// Author
 			// 
-			this->Author->HeaderText = L"Автор";
+			this->Author->HeaderText = L"РђРІС‚РѕСЂ";
 			this->Author->Name = L"Author";
 			this->Author->ReadOnly = true;
-			this->Author->Width = 170;
+			this->Author->Width = 150;
 			// 
 			// ShowAll
 			// 
 			this->ShowAll->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::AllCells;
-			this->ShowAll->HeaderText = L"Полная инф-ция";
+			this->ShowAll->HeaderText = L"РџРѕР»РЅР°СЏ РёРЅС„-С†РёСЏ";
 			this->ShowAll->Name = L"ShowAll";
 			this->ShowAll->ReadOnly = true;
-			this->ShowAll->Text = L"Полная инф-ция";
+			this->ShowAll->Text = L"РџРѕР»РЅР°СЏ РёРЅС„-С†РёСЏ";
 			this->ShowAll->UseColumnTextForButtonValue = true;
 			this->ShowAll->Width = 148;
 			// 
 			// groupBoxOrders
 			// 
 			this->groupBoxOrders->Controls->Add(this->dataGridViewOrders);
-			this->groupBoxOrders->Location = System::Drawing::Point(1143, 13);
+			this->groupBoxOrders->Location = System::Drawing::Point(982, 13);
 			this->groupBoxOrders->Name = L"groupBoxOrders";
-			this->groupBoxOrders->Size = System::Drawing::Size(307, 698);
+			this->groupBoxOrders->Size = System::Drawing::Size(263, 654);
 			this->groupBoxOrders->TabIndex = 3;
 			this->groupBoxOrders->TabStop = false;
-			this->groupBoxOrders->Text = L"Заказы";
+			this->groupBoxOrders->Text = L"Р—Р°РєР°Р·С‹";
 			// 
 			// dataGridViewOrders
 			// 
+			this->dataGridViewOrders->AllowUserToAddRows = false;
+			this->dataGridViewOrders->AllowUserToDeleteRows = false;
 			this->dataGridViewOrders->BackgroundColor = System::Drawing::Color::White;
 			this->dataGridViewOrders->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridViewOrders->ColumnHeadersVisible = false;
+			this->dataGridViewOrders->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->OrderInfo });
 			this->dataGridViewOrders->Location = System::Drawing::Point(16, 39);
 			this->dataGridViewOrders->Name = L"dataGridViewOrders";
-			this->dataGridViewOrders->RowTemplate->Height = 28;
-			this->dataGridViewOrders->Size = System::Drawing::Size(270, 629);
+			this->dataGridViewOrders->ReadOnly = true;
+			this->dataGridViewOrders->RowTemplate->Height = 40;
+			this->dataGridViewOrders->Size = System::Drawing::Size(220, 593);
 			this->dataGridViewOrders->TabIndex = 0;
-			this->dataGridViewOrders->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookForm::dataGridView1_CellContentClick);
+			// 
+			// OrderInfo
+			// 
+			this->OrderInfo->HeaderText = L"РРЅС„РѕСЂРјР°С†РёСЏ";
+			this->OrderInfo->Name = L"OrderInfo";
+			this->OrderInfo->ReadOnly = true;
+			this->OrderInfo->Width = 220;
 			// 
 			// BookForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 23);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(1479, 727);
+			this->ClientSize = System::Drawing::Size(1266, 677);
 			this->Controls->Add(this->groupBoxOrders);
 			this->Controls->Add(this->groupBoxAssortment);
 			this->Controls->Add(this->groupBoxConfig);
@@ -433,7 +440,7 @@ namespace bookShop {
 			this->Name = L"BookForm";
 			this->RightToLeft = System::Windows::Forms::RightToLeft::No;
 			this->ShowIcon = false;
-			this->Text = L"Книжная лавка";
+			this->Text = L"РљРЅРёР¶РЅР°СЏ Р»Р°РІРєР°";
 			this->TransparencyKey = System::Drawing::Color::MintCream;
 			this->Load += gcnew System::EventHandler(this, &BookForm::BookForm_Load);
 			this->groupBoxConfig->ResumeLayout(false);
@@ -456,6 +463,8 @@ namespace bookShop {
 Int32 daysNumber, dayStep, sec, usualMarkup, newMarkup, i = 0;
 
 private: System::Void buttonStart_Click(System::Object^  sender, System::EventArgs^  e) {
+	Logger::getInstance()->writeLog("SESSION BEGINS \n");
+
 	bool parseDayNumber = Int32::TryParse(this->textBoxDaysNumber->Text, daysNumber);
 	bool parseDayStep = Int32::TryParse(this->textBoxDayStep->Text, dayStep);
 	bool parseSec = Int32::TryParse(this->textBoxSec->Text, sec);
@@ -485,6 +494,11 @@ private: System::Void buttonStop_Click(System::Object^  sender, System::EventArg
 
 	this->dataGridViewAssortment->RowCount = 0;
 	this->dataGridViewShowAll->RowCount = 0;
+
+	StatisticsForm^ statisticsForm = gcnew StatisticsForm();
+	statisticsForm->Show();
+
+	Logger::getInstance()->writeLog("SESSION ENDS.\n\n\n\n\n\n");
 }
 
 private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArgs^  e) {
@@ -503,19 +517,45 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 		}
 
 		Order* order = OrderFactory::getRandomOrder(ids);
+		
+		int maxProcessTime = 5;
 
-		this->dataGridViewOrders->RowCount = 8;
+		bool parseMaxProcessTime = Int32::TryParse(this->textBoxDelivery->Text, maxProcessTime);
 
-		this->dataGridViewOrders->Rows[0]->Cells[0]->Value = "Фамилия";
-		this->dataGridViewOrders->Rows[1]->Cells[0]->Value = gcnew String(order->getSurname().c_str());
-		this->dataGridViewOrders->Rows[2]->Cells[0]->Value = "Телефон";
-		this->dataGridViewOrders->Rows[3]->Cells[0]->Value = gcnew String(order->getPhoneNumber().c_str());
-		this->dataGridViewOrders->Rows[4]->Cells[0]->Value = "Email";
-		this->dataGridViewOrders->Rows[5]->Cells[0]->Value = gcnew String(order->getEmail().c_str());
-		this->dataGridViewOrders->Rows[6]->Cells[0]->Value = "Заказанные книги";
-		this->dataGridViewOrders->Rows[7]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
+		std::pair<int, bool> processOrder = BookManager::getInstance()->processOrder(order, maxProcessTime);
+		int timeToProcessOrder = processOrder.first;
+		bool hasOrderToPublisher = processOrder.second;
 
+		this->dataGridViewOrders->RowCount = 12;
+
+		this->dataGridViewOrders->Rows[0]->Cells[0]->Value = "ID";
+		this->dataGridViewOrders->Rows[1]->Cells[0]->Value = System::Convert::ToString(order->getId());
+		this->dataGridViewOrders->Rows[2]->Cells[0]->Value = "Р¤Р°РјРёР»РёСЏ";
+		this->dataGridViewOrders->Rows[3]->Cells[0]->Value = gcnew String(order->getSurname().c_str());
+		this->dataGridViewOrders->Rows[4]->Cells[0]->Value = "РўРµР»РµС„РѕРЅ";
+		this->dataGridViewOrders->Rows[5]->Cells[0]->Value = gcnew String(order->getPhoneNumber().c_str());
+		this->dataGridViewOrders->Rows[6]->Cells[0]->Value = "Email";
+		this->dataGridViewOrders->Rows[7]->Cells[0]->Value = gcnew String(order->getEmail().c_str());
+		this->dataGridViewOrders->Rows[8]->Cells[0]->Value = "Р—Р°РєР°Р·Р°РЅРЅС‹Рµ РєРЅРёРіРё";
+		this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
+		this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РєР°Р·Р° РІ РґРЅСЏС…";
+		this->dataGridViewOrders->Rows[11]->Cells[0]->Value = System::Convert::ToString(timeToProcessOrder);
+		this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Р—Р°СЏРІРєР° РІ РёР·РґР°С‚РµР»СЊСЃС‚РІРѕ";
+		if (hasOrderToPublisher)
+		{
+			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "РџСЂРёСЃСѓС‚СЃС‚РІСѓРµС‚";
+		}
+		else
+		{
+			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚";
+		}
+		
 		i += dayStep;
+	}
+	else
+	{
+		timerConfig->Enabled = false;
+		i = 0;
 	}
 }
 	
@@ -534,16 +574,16 @@ private: System::Void dataGridViewAssortment_CellContentClick(System::Object^  s
 		this->dataGridViewShowAll->ColumnCount = 2;
 
 		this->dataGridViewShowAll->Rows[0]->Cells[0]->Value = System::Convert::ToString("ID");
-		this->dataGridViewShowAll->Rows[1]->Cells[0]->Value = System::Convert::ToString("Название");
-		this->dataGridViewShowAll->Rows[2]->Cells[0]->Value = System::Convert::ToString("Автор");
-		this->dataGridViewShowAll->Rows[3]->Cells[0]->Value = System::Convert::ToString("Количество страниц");
-		this->dataGridViewShowAll->Rows[4]->Cells[0]->Value = System::Convert::ToString("Жанры");
-		this->dataGridViewShowAll->Rows[5]->Cells[0]->Value = System::Convert::ToString("Язык");
-		this->dataGridViewShowAll->Rows[6]->Cells[0]->Value = System::Convert::ToString("Издательство");
-		this->dataGridViewShowAll->Rows[7]->Cells[0]->Value = System::Convert::ToString("Год издания");
-		this->dataGridViewShowAll->Rows[8]->Cells[0]->Value = System::Convert::ToString("Возрастной ценз");
-		this->dataGridViewShowAll->Rows[9]->Cells[0]->Value = System::Convert::ToString("Осталось на складе");
-		this->dataGridViewShowAll->Rows[10]->Cells[0]->Value = System::Convert::ToString("Цена, руб.");
+		this->dataGridViewShowAll->Rows[1]->Cells[0]->Value = System::Convert::ToString("РќР°Р·РІР°РЅРёРµ");
+		this->dataGridViewShowAll->Rows[2]->Cells[0]->Value = System::Convert::ToString("РђРІС‚РѕСЂ");
+		this->dataGridViewShowAll->Rows[3]->Cells[0]->Value = System::Convert::ToString("РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂР°РЅРёС†");
+		this->dataGridViewShowAll->Rows[4]->Cells[0]->Value = System::Convert::ToString("Р–Р°РЅСЂС‹");
+		this->dataGridViewShowAll->Rows[5]->Cells[0]->Value = System::Convert::ToString("РЇР·С‹Рє");
+		this->dataGridViewShowAll->Rows[6]->Cells[0]->Value = System::Convert::ToString("РР·РґР°С‚РµР»СЊСЃС‚РІРѕ");
+		this->dataGridViewShowAll->Rows[7]->Cells[0]->Value = System::Convert::ToString("Р“РѕРґ РёР·РґР°РЅРёСЏ");
+		this->dataGridViewShowAll->Rows[8]->Cells[0]->Value = System::Convert::ToString("Р’РѕР·СЂР°СЃС‚РЅРѕР№ С†РµРЅР·");
+		this->dataGridViewShowAll->Rows[9]->Cells[0]->Value = System::Convert::ToString("РћСЃС‚Р°Р»РѕСЃСЊ РЅР° СЃРєР»Р°РґРµ");
+		this->dataGridViewShowAll->Rows[10]->Cells[0]->Value = System::Convert::ToString("Р¦РµРЅР°, СЂСѓР±.");
 
 		this->dataGridViewShowAll->Rows[0]->Cells[1]->Value = gcnew String(b->getId().ToString());
 		this->dataGridViewShowAll->Rows[1]->Cells[1]->Value = gcnew String(b->getBookName().c_str());
@@ -558,7 +598,7 @@ private: System::Void dataGridViewAssortment_CellContentClick(System::Object^  s
 		this->dataGridViewShowAll->Rows[10]->Cells[1]->Value = gcnew String(b->getPrice().ToString());
 	}
 }
-private: System::Void dataGridView1_CellContentClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+private: System::Void groupBoxAssortment_Enter(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }

@@ -1,5 +1,3 @@
-#include <string>
-#include <map>
-#include <vector>
+#include "BookManager.h"
 
-using namespace std;
+BookManager* BookManager::bookManagerInstance = 0;

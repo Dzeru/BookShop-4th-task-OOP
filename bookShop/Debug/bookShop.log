@@ -1,11 +1,18 @@
-﻿  Book.cpp
-  BookForm.cpp
+﻿  BookForm.cpp
 c:\users\dzeru\source\repos\bookshop\bookshop\bookfactory.h(32): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(15): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(35): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(58): warning C4018: <: несоответствие типов со знаком и без знака
-  Database.cpp
+c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(26): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(63): warning C4018: <: несоответствие типов со знаком и без знака
+  StatisticsForm.cpp
   Создание кода...
 c:\users\dzeru\source\repos\bookshop\bookshop\database.h(29): warning C4715: Database::databaseSize: значение возвращается не при всех путях выполнения
+c:\users\dzeru\source\repos\bookshop\bookshop\database.h(56): warning C4700: использована неинициализированная локальная переменная "fb"
   Book.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
-  bookShop.vcxproj -> C:\Users\Dzeru\source\repos\bookShop\Debug\bookShop.exe
+StatisticsForm.obj : error LNK2005: "bool __cdecl compRating(class Book *,class Book *)" (?compRating@@YA_NPAVBook@@0@Z) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl orderMapToString(class std::map<class Book *,int,struct std::less<class Book *>,class std::allocator<struct std::pair<class Book * const,int> > >)" (?orderMapToString@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$map@PAVBook@@HU?$less@PAVBook@@@std@@V?$allocator@U?$pair@QAVBook@@H@std@@@3@@2@@Z) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::vector<class Book *,class std::allocator<class Book *> > __cdecl getBestsellers(void)" (?getBestsellers@@YA?AV?$vector@PAVBook@@V?$allocator@PAVBook@@@std@@@std@@XZ) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl setToString(class std::set<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,struct std::less<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >)" (?setToString@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@@Z) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "bool __cdecl compRating(class Book *,class Book *)" (?compRating@@$$FYA_NPAVBook@@0@Z) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl orderMapToString(class std::map<class Book *,int,struct std::less<class Book *>,class std::allocator<struct std::pair<class Book * const,int> > >)" (?orderMapToString@@$$FYA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$map@PAVBook@@HU?$less@PAVBook@@@std@@V?$allocator@U?$pair@QAVBook@@H@std@@@3@@2@@Z) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::vector<class Book *,class std::allocator<class Book *> > __cdecl getBestsellers(void)" (?getBestsellers@@$$FYA?AV?$vector@PAVBook@@V?$allocator@PAVBook@@@std@@@std@@XZ) єцх юяЁхфхыхэ т BookForm.obj
+StatisticsForm.obj : error LNK2005: "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl setToString(class std::set<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,struct std::less<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > >,class std::allocator<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > >)" (?setToString@@$$FYA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@@Z) єцх юяЁхфхыхэ т BookForm.obj
+C:\Users\Dzeru\source\repos\bookShop\Debug\bookShop.exe : fatal error LNK1169: юсэрЁєцхэ ьэюуюъЁрЄэю юяЁхфхыхээ√щ ёшьтюы - юфшэ шыш сюыхх

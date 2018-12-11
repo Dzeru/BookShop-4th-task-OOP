@@ -54,11 +54,11 @@ public:
 		{
 			Book* newRandomBook = getRandomBook(usualMarkup, newMarkup);
 
-			logger->writeLog("generate random book, id = " + std::to_string(newRandomBook->getId()) + ", book name = " + newRandomBook->getBookName() + "\n");
+			logger->writeLog("BOOKFACTORY: generate random book, id = " + std::to_string(newRandomBook->getId()) + ", book name = " + newRandomBook->getBookName() + "\n");
 
 			randomBooks.push_back(newRandomBook);
 			bool upd = Database::getInstance()->updateBook(newRandomBook);
-			logger->writeLog("is book with id " + std::to_string(newRandomBook->getId()) + " updated: ");
+			logger->writeLog("BOOKFACTORY: is book with id " + std::to_string(newRandomBook->getId()) + " updated: ");
 			if (upd)
 			{
 				logger->writeLog("yes \n");
@@ -69,7 +69,7 @@ public:
 			}
 		}
 
-		logger->writeLog("book database size = " + std::to_string(Database::getInstance()->databaseSize("books")) + "\n");
+		logger->writeLog("BOOKFACTORY: book database size = " + std::to_string(Database::getInstance()->databaseSize("books")) + "\n");
 		return randomBooks;
 	}
 };
