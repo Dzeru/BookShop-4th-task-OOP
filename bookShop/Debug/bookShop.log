@@ -1,4 +1,11 @@
-﻿  BookForm.cpp
+﻿  Book.cpp
+  BookForm.cpp
 c:\users\dzeru\source\repos\bookshop\bookshop\bookfactory.h(32): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(15): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(35): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(58): warning C4018: <: несоответствие типов со знаком и без знака
+  Database.cpp
+  Создание кода...
+c:\users\dzeru\source\repos\bookshop\bookshop\database.h(29): warning C4715: Database::databaseSize: значение возвращается не при всех путях выполнения
   Book.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   bookShop.vcxproj -> C:\Users\Dzeru\source\repos\bookShop\Debug\bookShop.exe

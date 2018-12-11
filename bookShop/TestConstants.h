@@ -1,7 +1,7 @@
 #pragma once
+#include "Constants.h"
 #include <vector>
 #include <set>
-#include "Constants.h"
 
 class TestConstants
 {
@@ -21,7 +21,7 @@ public:
 
 	static std::set<std::string> getRandomGenres()
 	{
-		int numberOfGenres = std::rand() % 5;
+		int numberOfGenres = std::rand() % 5 + 1;
 
 		std::set<std::string> genres;
 
@@ -52,7 +52,7 @@ public:
 		return orderEmailTest[std::rand() % orderEmailTest.size()];
 	}
 
-	std::string getRandomOrderPhone()
+	static std::string getRandomOrderPhoneNumber()
 	{
 		return orderPhoneTest[std::rand() % orderPhoneTest.size()];
 	}

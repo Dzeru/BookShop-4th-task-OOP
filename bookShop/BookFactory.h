@@ -1,7 +1,7 @@
 #pragma once
-//#include "Book.h"
 #include "TestConstants.h"
 #include "Database.h"
+#include "Logger.h"
 
 class BookFactory
 {
@@ -41,6 +41,8 @@ public:
 
 	static std::vector<Book*> getRandomListOfBooks(int usualMarkup, int newMarkup)
 	{
+		Logger* logger = Logger::getInstance();
+
 		int rnd = std::rand() % 30 + 1;
 
 		if (rnd < 10)
@@ -51,10 +53,23 @@ public:
 		for (int i = 0; i < rnd; i++)
 		{
 			Book* newRandomBook = getRandomBook(usualMarkup, newMarkup);
+
+			logger->writeLog("generate random book, id = " + std::to_string(newRandomBook->getId()) + ", book name = " + newRandomBook->getBookName() + "\n");
+
 			randomBooks.push_back(newRandomBook);
-			Database::getInstance()->updateBook(newRandomBook);
+			bool upd = Database::getInstance()->updateBook(newRandomBook);
+			logger->writeLog("is book with id " + std::to_string(newRandomBook->getId()) + " updated: ");
+			if (upd)
+			{
+				logger->writeLog("yes \n");
+			}
+			else
+			{
+				logger->writeLog("no \n");
+			}
 		}
 
+		logger->writeLog("book database size = " + std::to_string(Database::getInstance()->databaseSize("books")) + "\n");
 		return randomBooks;
 	}
 };
