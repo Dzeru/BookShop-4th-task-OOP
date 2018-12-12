@@ -1,10 +1,10 @@
 ﻿#pragma once
+#include "StatisticsForm.h"
 #include "Utils.h"
 #include "BookFactory.h"
 #include "OrderFactory.h"
 #include "BookManager.h"
 #include "Logger.h"
-#include "StatisticsForm.h"
 
 namespace bookShop {
 
@@ -495,8 +495,9 @@ private: System::Void buttonStop_Click(System::Object^  sender, System::EventArg
 	this->dataGridViewAssortment->RowCount = 0;
 	this->dataGridViewShowAll->RowCount = 0;
 
-	StatisticsForm^ statisticsForm = gcnew StatisticsForm();
+	StatisticsForm^ statisticsForm = gcnew StatisticsForm;
 	statisticsForm->Show();
+	statisticsForm->Visible = true;
 
 	Logger::getInstance()->writeLog("SESSION ENDS.\n\n\n\n\n\n");
 }
@@ -526,7 +527,7 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 		int timeToProcessOrder = processOrder.first;
 		bool hasOrderToPublisher = processOrder.second;
 
-		this->dataGridViewOrders->RowCount = 12;
+		this->dataGridViewOrders->RowCount = 14;
 
 		this->dataGridViewOrders->Rows[0]->Cells[0]->Value = "ID";
 		this->dataGridViewOrders->Rows[1]->Cells[0]->Value = System::Convert::ToString(order->getId());
@@ -540,14 +541,14 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 		this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
 		this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Время выполнения заказа в днях";
 		this->dataGridViewOrders->Rows[11]->Cells[0]->Value = System::Convert::ToString(timeToProcessOrder);
-		this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Заявка в издательство";
+		this->dataGridViewOrders->Rows[12]->Cells[0]->Value = "Заявка в издательство";
 		if (hasOrderToPublisher)
 		{
-			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Присутствует";
+			this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Присутствует";
 		}
 		else
 		{
-			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Отсутствует";
+			this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Отсутствует";
 		}
 		
 		i += dayStep;
@@ -556,6 +557,10 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 	{
 		timerConfig->Enabled = false;
 		i = 0;
+
+		StatisticsForm^ statisticsForm = gcnew StatisticsForm;
+		statisticsForm->Show();
+		statisticsForm->Visible = true;
 	}
 }
 	

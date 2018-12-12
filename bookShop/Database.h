@@ -8,6 +8,8 @@
 class Database
 {
 public:
+	static int amountOfSendedOrders;
+
 	static Database* getInstance()
 	{
 		if (!databaseInstance)
