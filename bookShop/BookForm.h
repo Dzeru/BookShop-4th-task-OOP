@@ -504,47 +504,55 @@ private: System::Void buttonStop_Click(System::Object^  sender, System::EventArg
 
 private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArgs^  e) {
 
-	std::vector<int> ids;
-
-	int id;
-	bool parseId;
-
 	if (i < daysNumber)
 	{
+		std::vector<int> ids;
+
+		int id;
+		bool parseId;
+
+		int maxProcessTime = 5;
+
+		bool parseMaxProcessTime = Int32::TryParse(this->textBoxDelivery->Text, maxProcessTime);
+
 		for (int i = 0; i < this->dataGridViewAssortment->RowCount; i++)
 		{
 			parseId = Int32::TryParse(System::Convert::ToString(this->dataGridViewAssortment->Rows[i]->Cells[0]->Value), id);
 			ids.push_back(id);
 		}
 
-		Order* order = OrderFactory::getRandomOrder(ids);
-		
-		int maxProcessTime = 5;
+		BookManager::getInstance()->checkSmallAmountOfBooksAndOrder(ids, maxProcessTime);
 
-		bool parseMaxProcessTime = Int32::TryParse(this->textBoxDelivery->Text, maxProcessTime);
+		//Моделирование, чтобы заказы приходили не каждый день
+		int chanceToGetOrder = std::rand() % 3;
 
-		std::pair<int, bool> processOrder = BookManager::getInstance()->processOrder(order, maxProcessTime);
-		int timeToProcessOrder = processOrder.first;
-		bool hasOrderToPublisher = processOrder.second;
-
-		this->dataGridViewOrders->RowCount = 14;
-
-		this->dataGridViewOrders->Rows[0]->Cells[0]->Value = "ID";
-		this->dataGridViewOrders->Rows[1]->Cells[0]->Value = System::Convert::ToString(order->getId());
-		this->dataGridViewOrders->Rows[2]->Cells[0]->Value = "Фамилия";
-		this->dataGridViewOrders->Rows[3]->Cells[0]->Value = gcnew String(order->getSurname().c_str());
-		this->dataGridViewOrders->Rows[4]->Cells[0]->Value = "Телефон";
-		this->dataGridViewOrders->Rows[5]->Cells[0]->Value = gcnew String(order->getPhoneNumber().c_str());
-		this->dataGridViewOrders->Rows[6]->Cells[0]->Value = "Email";
-		this->dataGridViewOrders->Rows[7]->Cells[0]->Value = gcnew String(order->getEmail().c_str());
-		this->dataGridViewOrders->Rows[8]->Cells[0]->Value = "Заказанные книги";
-		this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
-		this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Время выполнения заказа в днях";
-		this->dataGridViewOrders->Rows[11]->Cells[0]->Value = System::Convert::ToString(timeToProcessOrder);
-		this->dataGridViewOrders->Rows[12]->Cells[0]->Value = "Заявка в издательство";
-		if (hasOrderToPublisher)
+		if (chanceToGetOrder == 0 || chanceToGetOrder == 1)
 		{
-			this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Присутствует";
+			Order* order = OrderFactory::getRandomOrder(ids);
+
+			std::pair<int, bool> processOrder = BookManager::getInstance()->processOrder(order, maxProcessTime);
+			int timeToProcessOrder = processOrder.first;
+			bool hasOrderToPublisher = processOrder.second;
+
+			this->dataGridViewOrders->RowCount = 14;
+
+			this->dataGridViewOrders->Rows[0]->Cells[0]->Value = "ID";
+			this->dataGridViewOrders->Rows[1]->Cells[0]->Value = System::Convert::ToString(order->getId());
+			this->dataGridViewOrders->Rows[2]->Cells[0]->Value = "Фамилия";
+			this->dataGridViewOrders->Rows[3]->Cells[0]->Value = gcnew String(order->getSurname().c_str());
+			this->dataGridViewOrders->Rows[4]->Cells[0]->Value = "Телефон";
+			this->dataGridViewOrders->Rows[5]->Cells[0]->Value = gcnew String(order->getPhoneNumber().c_str());
+			this->dataGridViewOrders->Rows[6]->Cells[0]->Value = "Email";
+			this->dataGridViewOrders->Rows[7]->Cells[0]->Value = gcnew String(order->getEmail().c_str());
+			this->dataGridViewOrders->Rows[8]->Cells[0]->Value = "Заказанные книги";
+			this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
+			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Время выполнения заказа в днях";
+			this->dataGridViewOrders->Rows[11]->Cells[0]->Value = System::Convert::ToString(timeToProcessOrder);
+			this->dataGridViewOrders->Rows[12]->Cells[0]->Value = "Заявка в издательство";
+			if (hasOrderToPublisher)
+			{
+				this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Присутствует";
+			}
 		}
 		else
 		{

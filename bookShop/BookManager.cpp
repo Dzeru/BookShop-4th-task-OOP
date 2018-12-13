@@ -54,10 +54,33 @@ std::pair<int, bool> BookManager::processOrder(Order* order, int maxPossibleProc
 	{
 		Database::amountOfSendedOrders++;
 		timeToProcessOrder += std::rand() % maxPossibleProcessingTime + 1;
+		logger->writeLog("BOOKMANAGER: send order to publisher \n");
 	}
 
 	logger->writeLog("BOOKMANAGER: order with id = " + std::to_string(order->getId()) + " is processed in " + std::to_string(timeToProcessOrder) + " days \n");
 	Database::getInstance()->updateOrder(order);
 
 	return std::pair<int, bool>(timeToProcessOrder, !orderToPublisher.empty());
+}
+
+void BookManager::checkSmallAmountOfBooksAndOrder(std::vector<int> idsOfBooks, int maxPossibleProcessingTime)
+{
+	Logger* logger = Logger::getInstance();
+
+	std::map<Book*, int> orderToPublisher;
+	int timeToProcessOrder = 0;
+
+	for (int i = 0; i < idsOfBooks.size(); i++)
+	{
+		Book* book = Database::getInstance()->findBook(idsOfBooks[i]);
+
+		if (book->getCount() < 3)
+		{
+			orderToPublisher.insert(std::pair<Book*, int>(book, 10));		
+		}
+	}
+
+	Database::amountOfSendedOrders++;
+	timeToProcessOrder += std::rand() % maxPossibleProcessingTime + 1;
+	logger->writeLog("BOOKMANAGER: send order to publisher \n");
 }

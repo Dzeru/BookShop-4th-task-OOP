@@ -17,7 +17,7 @@ public:
 	}
 
 	std::pair<int, bool> processOrder(Order* order, int maxPossibleProcessingTime);
-	
+	void  checkSmallAmountOfBooksAndOrder(std::vector<int> idsOfBooks, int maxPossibleProcessingTime);
 
 private:
 	static BookManager* bookManagerInstance;
