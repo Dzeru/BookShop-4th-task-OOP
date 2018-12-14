@@ -545,7 +545,7 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 			this->dataGridViewOrders->Rows[6]->Cells[0]->Value = "Email";
 			this->dataGridViewOrders->Rows[7]->Cells[0]->Value = gcnew String(order->getEmail().c_str());
 			this->dataGridViewOrders->Rows[8]->Cells[0]->Value = "Заказанные книги";
-			this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(orderMapToString(order->getOrderList()).c_str());
+			this->dataGridViewOrders->Rows[9]->Cells[0]->Value = gcnew String(Utils::orderMapToString(order->getOrderList()).c_str());
 			this->dataGridViewOrders->Rows[10]->Cells[0]->Value = "Время выполнения заказа в днях";
 			this->dataGridViewOrders->Rows[11]->Cells[0]->Value = System::Convert::ToString(timeToProcessOrder);
 			this->dataGridViewOrders->Rows[12]->Cells[0]->Value = "Заявка в издательство";
@@ -553,10 +553,10 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 			{
 				this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Присутствует";
 			}
-		}
-		else
-		{
-			this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Отсутствует";
+			else
+			{
+				this->dataGridViewOrders->Rows[13]->Cells[0]->Value = "Отсутствует";
+			}
 		}
 		
 		i += dayStep;
@@ -602,7 +602,7 @@ private: System::Void dataGridViewAssortment_CellContentClick(System::Object^  s
 		this->dataGridViewShowAll->Rows[1]->Cells[1]->Value = gcnew String(b->getBookName().c_str());
 		this->dataGridViewShowAll->Rows[2]->Cells[1]->Value = gcnew String(b->getAuthor().c_str());
 		this->dataGridViewShowAll->Rows[3]->Cells[1]->Value = gcnew String(b->getNumberOfPages().ToString());
-		this->dataGridViewShowAll->Rows[4]->Cells[1]->Value = gcnew String(setToString(b->getGenres()).c_str());
+		this->dataGridViewShowAll->Rows[4]->Cells[1]->Value = gcnew String(Utils::setToString(b->getGenres()).c_str());
 		this->dataGridViewShowAll->Rows[5]->Cells[1]->Value = gcnew String(b->getLang().c_str());
 		this->dataGridViewShowAll->Rows[6]->Cells[1]->Value = gcnew String(b->getPublisher().c_str());
 		this->dataGridViewShowAll->Rows[7]->Cells[1]->Value = gcnew String(b->getYearOfPublishing().ToString());

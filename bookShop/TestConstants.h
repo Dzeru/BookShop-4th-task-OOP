@@ -81,7 +81,7 @@ public:
 
 	static int getRandomNumberOfPages()
 	{
-		return (std::rand() % 3000);
+		return  ((std::rand() % 3000) + 1);
 	}
 
 	static bool getRandomIsNew()
