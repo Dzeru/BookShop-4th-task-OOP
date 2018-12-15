@@ -472,6 +472,17 @@ private: System::Void buttonStart_Click(System::Object^  sender, System::EventAr
 	bool parseUsualMarkup = Int32::TryParse(this->textBoxUsualMarkup->Text, usualMarkup);
 	bool parseNewMarkup = Int32::TryParse(this->textBoxNewMarkup->Text, newMarkup);
 
+	if (!parseDayNumber)
+		daysNumber = 15;
+	if (!parseDayStep)
+		dayStep = 1;
+	if (!parseSec)
+		sec = 1;
+	if (!parseUsualMarkup)
+		usualMarkup = 12;
+	if (!parseNewMarkup)
+		newMarkup = 23;
+
 	std::vector<Book*> startAssortment = BookFactory::getRandomListOfBooks(usualMarkup, newMarkup);
 
 	this->dataGridViewAssortment->RowCount = startAssortment.size();
@@ -514,6 +525,9 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 		int maxProcessTime = 5;
 
 		bool parseMaxProcessTime = Int32::TryParse(this->textBoxDelivery->Text, maxProcessTime);
+
+		if (!parseMaxProcessTime)
+			maxProcessTime = 5;
 
 		for (int i = 0; i < this->dataGridViewAssortment->RowCount; i++)
 		{
