@@ -1,8 +1,7 @@
-﻿  BookForm.cpp
-c:\users\dzeru\source\repos\bookshop\bookshop\bookfactory.h(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(26): warning C4018: '<': signed/unsigned mismatch
-c:\users\dzeru\source\repos\bookshop\bookshop\orderfactory.h(63): warning C4018: '<': signed/unsigned mismatch
+﻿  Utils.cpp
+c:\users\dzeru\source\repos\bookshop\bookshop\utils.cpp(71): warning C4018: '<': signed/unsigned mismatch
+c:\users\dzeru\source\repos\bookshop\bookshop\utils.cpp(111): warning C4018: '<': signed/unsigned mismatch
+c:\users\dzeru\source\repos\bookshop\bookshop\utils.cpp(113): warning C4018: '<': signed/unsigned mismatch
 c:\users\dzeru\source\repos\bookshop\bookshop\database.h(31): warning C4715: 'Database::databaseSize': not all control paths return a value
-c:\users\dzeru\source\repos\bookshop\bookshop\database.h(58): warning C4700: uninitialized local variable 'fb' used
   Book.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   bookShop.vcxproj -> C:\Users\Dzeru\source\repos\bookShop\Debug\bookShop.exe

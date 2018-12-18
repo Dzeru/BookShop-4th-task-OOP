@@ -463,7 +463,7 @@ namespace bookShop {
 Int32 daysNumber, dayStep, sec, usualMarkup, newMarkup, i = 0;
 
 private: System::Void buttonStart_Click(System::Object^  sender, System::EventArgs^  e) {
-	Logger::getInstance()->writeLog("SESSION BEGINS \n");
+	Logger::getInstance()->writeLog("НАЧАЛО РАБОЧЕЙ СЕССИИ. \n");
 
 	bool parseDayNumber = Int32::TryParse(this->textBoxDaysNumber->Text, daysNumber);
 	bool parseDayStep = Int32::TryParse(this->textBoxDayStep->Text, dayStep);
@@ -510,7 +510,7 @@ private: System::Void buttonStop_Click(System::Object^  sender, System::EventArg
 	statisticsForm->Show();
 	statisticsForm->Visible = true;
 
-	Logger::getInstance()->writeLog("SESSION ENDS.\n\n\n\n\n\n");
+	Logger::getInstance()->writeLog("КОНЕЦ РАБОЧЕЙ СЕССИИ.\n\n\n\n\n\n");
 }
 
 private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArgs^  e) {
@@ -542,7 +542,7 @@ private: System::Void timerConfig_Tick(System::Object^  sender, System::EventArg
 
 		if (chanceToGetOrder == 0 || chanceToGetOrder == 1)
 		{
-			Order* order = OrderFactory::getRandomOrder(ids);
+			Order* order = OrderFactory::getRandomOrder(ids, i);
 
 			std::pair<int, bool> processOrder = BookManager::getInstance()->processOrder(order, maxProcessTime);
 			int timeToProcessOrder = processOrder.first;

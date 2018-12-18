@@ -54,22 +54,22 @@ public:
 		{
 			Book* newRandomBook = getRandomBook(usualMarkup, newMarkup);
 
-			logger->writeLog("BOOKFACTORY: generate random book, id = " + std::to_string(newRandomBook->getId()) + ", book name = " + newRandomBook->getBookName() + "\n");
+			logger->writeLog("BOOKFACTORY: генерируется случайная книга с id = " + std::to_string(newRandomBook->getId()) + ", название = " + newRandomBook->getBookName() + "\n");
 
 			randomBooks.push_back(newRandomBook);
 			bool upd = Database::getInstance()->updateBook(newRandomBook);
-			logger->writeLog("BOOKFACTORY: is book with id " + std::to_string(newRandomBook->getId()) + " updated: ");
+			logger->writeLog("BOOKFACTORY: обновлена ли книга с id " + std::to_string(newRandomBook->getId()) + ": ");
 			if (upd)
 			{
-				logger->writeLog("yes \n");
+				logger->writeLog("да \n");
 			}
 			else
 			{
-				logger->writeLog("no \n");
+				logger->writeLog("нет \n");
 			}
 		}
 
-		logger->writeLog("BOOKFACTORY: book database size = " + std::to_string(Database::getInstance()->databaseSize("books")) + "\n");
+		logger->writeLog("BOOKFACTORY: размер базы данных книг = " + std::to_string(Database::getInstance()->databaseSize("books")) + "\n");
 		return randomBooks;
 	}
 };

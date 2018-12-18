@@ -54,10 +54,10 @@ std::pair<int, bool> BookManager::processOrder(Order* order, int maxPossibleProc
 	{
 		Database::amountOfSendedOrders++;
 		timeToProcessOrder += std::rand() % maxPossibleProcessingTime + 1;
-		logger->writeLog("BOOKMANAGER: send order to publisher \n");
+		logger->writeLog("BOOKMANAGER: отправлен заказ в издательство \n");
 	}
 
-	logger->writeLog("BOOKMANAGER: order with id = " + std::to_string(order->getId()) + " is processed in " + std::to_string(timeToProcessOrder) + " days \n");
+	logger->writeLog("BOOKMANAGER: заказ с id = " + std::to_string(order->getId()) + " будет выполнен за " + std::to_string(timeToProcessOrder) + " дней \n");
 	Database::getInstance()->updateOrder(order);
 
 	return std::pair<int, bool>(timeToProcessOrder, !orderToPublisher.empty());
@@ -82,5 +82,5 @@ void BookManager::checkSmallAmountOfBooksAndOrder(std::vector<int> idsOfBooks, i
 
 	Database::amountOfSendedOrders++;
 	timeToProcessOrder += std::rand() % maxPossibleProcessingTime + 1;
-	logger->writeLog("BOOKMANAGER: send order to publisher \n");
+	logger->writeLog("BOOKMANAGER: отправлен заказ в издательство \n");
 }

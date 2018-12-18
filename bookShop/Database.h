@@ -43,7 +43,7 @@ public:
 	{
 		int id = b->getId();
 		Logger* logger = Logger::getInstance();
-		logger->writeLog("DATABASE: update book " + std::to_string(id) + "\n");
+		logger->writeLog("DATABASE: обновлена книга с id = " + std::to_string(id) + "\n");
 		books[id] = b;
 		return true;
 	}
@@ -51,13 +51,12 @@ public:
 	Book* findBook(int id)
 	{
 		Logger* logger = Logger::getInstance();
-		logger->writeLog("DATABASE: find book " + std::to_string(id) + "\n");
+		logger->writeLog("DATABASE: поиск книги с id = " + std::to_string(id) + "\n");
 		
 		Book* fb;
 
 		for (auto i = books.begin(); (fb == NULL) && (i != books.end()); i++)
 		{
-			logger->writeLog("DATABASE: find book iter " + std::to_string(i->first) + " " + std::to_string(id) + "\n");
 			if (i->first == id)
 				fb = i->second;
 		}
@@ -69,9 +68,14 @@ public:
 	{
 		int id = o->getId();
 		Logger* logger = Logger::getInstance();
-		logger->writeLog("DATABASE: update order " + std::to_string(id) + "\n");
+		logger->writeLog("DATABASE: обновлен заказ с id = " + std::to_string(id) + "\n");
 		orders[id] = o;
 		return true;
+	}
+
+	std::map<int, std::vector<Order*> > findAllOrdersByDay()
+	{
+		return ordersByDay;
 	}
 
 	std::map<int, Book*> findAllBooksMap()
@@ -94,18 +98,24 @@ public:
 	Order* findOrder(int id)
 	{
 		Logger* logger = Logger::getInstance();
-		logger->writeLog("DATABASE: find order " + std::to_string(id) + "\n");
+		logger->writeLog("DATABASE: поиск заказа с id = " + std::to_string(id) + "\n");
 
 		Order* fo;
 
 		for (auto i = orders.begin(); (fo == NULL) && (i != orders.end()); i++)
 		{
-			logger->writeLog("DATABASE: find order iter " + std::to_string(i->first) + " " + std::to_string(id) + "\n");
 			if (i->first == id)
 				fo = i->second;
 		}
 
 		return fo;
+	}
+
+	bool updateOrdersByDay(Order* o, int day)
+	{
+		Logger::getInstance()->writeLog("DATABASE: обновлен список заказов за " + std::to_string(day) + " день \n");
+		ordersByDay[day].push_back(o);
+		return true;
 	}
 
 private:
@@ -116,4 +126,5 @@ private:
 
 	std::map<int, Book*> books;
 	std::map<int, Order*> orders;
+	std::map<int, std::vector<Order*> > ordersByDay;
 };
